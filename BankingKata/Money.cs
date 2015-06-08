@@ -42,5 +42,20 @@ namespace BankingKata
         {
             return new Money(x.amount - y.amount);
         }
+
+        public static Money operator -(Money x)
+        {
+            return new Money(-x.amount);
+        }
+
+        public static Money ValueOf(decimal amount)
+        {
+            return new Money(amount);
+        }
+
+        public override string ToString()
+        {
+            return amount.ToString();
+        }
     }
 }
