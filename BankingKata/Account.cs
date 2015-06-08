@@ -31,14 +31,16 @@ namespace BankingKata
             return !(account == money);
         }
 
-        public void Deposit(Money money)
+        public Money Deposit(Money money)
         {
             balance += money;
+            return balance;
         }
 
-        public void Withdraw(Money money)
+        public Money Withdraw(Money money)
         {
             balance -= money;
+            return balance;
         }
     }
 }
