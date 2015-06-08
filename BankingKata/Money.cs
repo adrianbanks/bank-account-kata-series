@@ -30,5 +30,15 @@ namespace BankingKata
         {
             return !(x == y);
         }
+
+        public static Money operator +(Money x, Money y)
+        {
+            return new Money(x.amount + y.amount);
+        }
+
+        public static Money operator -(Money x, Money y)
+        {
+            return new Money(x.amount - y.amount);
+        }
     }
 }

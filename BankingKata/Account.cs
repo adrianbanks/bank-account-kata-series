@@ -30,5 +30,15 @@ namespace BankingKata
         {
             return !(account == money);
         }
+
+        public void Deposit(Money money)
+        {
+            balance += money;
+        }
+
+        public void Withdraw(Money money)
+        {
+            balance -= money;
+        }
     }
 }
