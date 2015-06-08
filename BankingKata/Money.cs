@@ -4,6 +4,8 @@ namespace BankingKata
 {
     public class Money : IEquatable<Money>
     {
+        public static readonly Money Zero = new Money(0m);
+
         private readonly decimal amount;
 
         public Money(decimal amount)

@@ -9,15 +9,16 @@ namespace BankingKataTests
         [Test]
         public void NewAccountHasZeroBalance()
         {
-            Account account = new Account(new Money(0m));
+            Account account = new Account(Money.Zero);
+            var openingBalance = account.Deposit(Money.Zero);
 
-            Assert.That(account == new Money(0m), Is.True);
+            Assert.That(openingBalance == Money.Zero, Is.True);
         }
 
         [Test]
         public void DepositingAddsToTheBalance()
         {
-            Account account = new Account(new Money(0m));
+            Account account = new Account(Money.Zero);
             Money newBalance = account.Deposit(new Money(10m));
 
             Assert.That(newBalance == new Money(10m), Is.True);

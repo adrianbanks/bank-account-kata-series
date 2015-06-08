@@ -1,34 +1,12 @@
-﻿using System;
-
-namespace BankingKata
+﻿namespace BankingKata
 {
-    public class Account : IEquatable<Money>
+    public class Account
     {
         private Money balance;
 
         public Account(Money openingBalance)
         {
             balance = openingBalance;
-        }
-
-        public bool Equals(Money other)
-        {
-            return balance == other;
-        }
-
-        public override bool Equals(object obj)
-        {
-            return Equals(obj as Money);
-        }
-
-        public static bool operator ==(Account account, Money money)
-        {
-            return account.Equals(money);
-        }
-
-        public static bool operator !=(Account account, Money money)
-        {
-            return !(account == money);
         }
 
         public Money Deposit(Money money)
