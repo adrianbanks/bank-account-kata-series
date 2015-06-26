@@ -29,5 +29,11 @@ namespace BankingKata
             var debitEntry = new DebitEntry(money);
             _transactionLog.Record(debitEntry);
         }
+
+        public void OutputBalance(IPrinter printer)
+        {
+            var balance = CalculateBalance();
+            printer.PrintBalance(balance);
+        }
     }
 }
