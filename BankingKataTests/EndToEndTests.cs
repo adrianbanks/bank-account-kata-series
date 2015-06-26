@@ -13,7 +13,7 @@ namespace BankingKataTests
             var account = new Account();
             var openingBalance = account.Deposit(Money.Zero);
 
-            Assert.That(openingBalance == Money.Zero, Is.True);
+            Assert.That(openingBalance, Is.EqualTo(Money.Zero));
         }
 
         [Test]
@@ -22,7 +22,7 @@ namespace BankingKataTests
             var account = new Account();
             var newBalance = account.Deposit(Money.ValueOf(10m));
 
-            Assert.That(newBalance == Money.ValueOf(10m), Is.True);
+            Assert.That(newBalance, Is.EqualTo(Money.ValueOf(10m)));
         }
 
         [Test]
@@ -31,7 +31,7 @@ namespace BankingKataTests
             var account = new Account(Money.ValueOf(1000000m));
             var newBalance = account.Withdraw(Money.ValueOf(999999));
 
-            Assert.That(newBalance == Money.ValueOf(1), Is.True);
+            Assert.That(newBalance, Is.EqualTo(Money.ValueOf(1)));
         }
 
         [Test]
