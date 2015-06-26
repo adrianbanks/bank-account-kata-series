@@ -35,5 +35,10 @@ namespace BankingKata
             var balance = CalculateBalance();
             printer.PrintBalance(balance);
         }
+
+        public void PrintStatement(IPrinter printer)
+        {
+            printer.PrintStatement(_transactionLog);
+        }
     }
 }
