@@ -1,13 +1,13 @@
-﻿using System;
+using System;
 
 namespace BankingKata
 {
-    public class DebitEntry : ITransaction
+    public class ChequeDebitEntry : ITransaction
     {
         private readonly DateTime transactionDate;
-        private readonly Money transactionAmount;
+        private readonly Cheque transactionAmount;
 
-        public DebitEntry(DateTime transactionDate, Money transactionAmount)
+        public ChequeDebitEntry(DateTime transactionDate, Cheque transactionAmount)
         {
             this.transactionDate = transactionDate;
             this.transactionAmount = transactionAmount;
@@ -20,13 +20,13 @@ namespace BankingKata
 
         public override bool Equals(object obj)
         {
-            var transaction = (obj as DebitEntry);
+            var transaction = (obj as ChequeDebitEntry);
             return transaction != null && transactionAmount.Equals(transaction.transactionAmount);
         }
 
         public override string ToString()
         {
-            return string.Format("ATM {0} ({1})", transactionDate.ToString("dd MMM yyyy"), transactionAmount);
+            return string.Format("CHQ {0} {1} ({2})", transactionAmount.ChequeNumber, transactionDate.ToString("dd MMM yyyy"), transactionAmount);
         }
     }
 }

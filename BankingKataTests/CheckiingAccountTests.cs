@@ -13,7 +13,7 @@ namespace BankingKataTests
             var account = new Account();
 
             account.Deposit(DateTime.Now, new Money(1000));
-            account.Withdraw(DateTime.Now, new Cheque(500));
+            account.Withdraw(DateTime.Now, new Cheque(500, ""));
 
             var balance = account.CalculateBalance();
 

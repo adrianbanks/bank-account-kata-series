@@ -26,7 +26,7 @@ namespace BankingKata
 
         public override string ToString()
         {
-            return transactionAmount.Format(transactionDate);
+            return string.Format("DEP {0} {1}", transactionDate.ToString("dd MMM yyyy"), transactionAmount);
         }
     }
 }

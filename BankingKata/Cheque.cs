@@ -1,16 +1,12 @@
-﻿using System;
-
-namespace BankingKata
+﻿namespace BankingKata
 {
     public class Cheque : Money
     {
-        public Cheque(decimal amount) : base(amount)
-        {
-        }
+        public string ChequeNumber { get; private set; }
 
-        public override string Format(DateTime transactionDate)
+        public Cheque(decimal amount, string chequeNumber) : base(amount)
         {
-            return base.Format(transactionDate);
+            ChequeNumber = chequeNumber;
         }
     }
 }

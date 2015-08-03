@@ -35,10 +35,5 @@ namespace BankingKata
             var amount2 = other._amount;
             return new Money(amount1 - amount2);
         }
-
-        public virtual string Format(DateTime transactionDate)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -93,7 +93,7 @@ namespace BankingKataTests
         public void ChequeWithdrawalIsPrinted()
         {
             var account = new Account();
-            account.Withdraw(new DateTime(2015, 07, 13), new Cheque(123m));
+            account.Withdraw(new DateTime(2015, 07, 13), new Cheque(123m, "123456"));
 
             var stringWriter = new StringWriter();
             Console.SetOut(stringWriter);
