@@ -26,7 +26,7 @@ namespace BankingKata
 
         public override string ToString()
         {
-            return string.Format("CHQ {0} {1} ({2})", transactionAmount.ChequeNumber, transactionDate.ToString("dd MMM yyyy"), transactionAmount);
+            return transactionAmount.Format(transactionDate.ToString("dd MMM yyyy"));
         }
     }
 }
