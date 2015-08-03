@@ -1,3 +1,5 @@
+using System;
+
 namespace BankingKata
 {
     public class Money
@@ -32,6 +34,11 @@ namespace BankingKata
             var amount1 = @this._amount;
             var amount2 = other._amount;
             return new Money(amount1 - amount2);
+        }
+
+        public virtual string Format(DateTime transactionDate)
+        {
+            throw new NotImplementedException();
         }
     }
 }
