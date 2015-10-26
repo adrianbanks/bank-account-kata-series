@@ -26,7 +26,7 @@ namespace BankingConsole
         private static void MainMenu(IAccount account)
         {
             Console.WriteLine();
-            Console.WriteLine("Balance: £" + account.CalculateBalance());
+            Console.WriteLine("Balance: " + account.CalculateBalance());
             Console.WriteLine();
             Console.WriteLine("Press a key to choose an option:");
             Console.WriteLine();
@@ -39,20 +39,20 @@ namespace BankingConsole
             Console.WriteLine();
             Console.WriteLine();
 
-            if (key.Key == ConsoleKey.NumPad1)
+            if (key.Key == ConsoleKey.NumPad1 || key.Key == ConsoleKey.D1)
             {
                 // deposit
                 Console.WriteLine("deposit");
             }
-            else if (key.Key == ConsoleKey.NumPad2)
+            else if (key.Key == ConsoleKey.NumPad2 || key.Key == ConsoleKey.D2)
             {
                 // withdraw
                 Console.WriteLine("withdraw");
             }
-            else if (key.Key == ConsoleKey.NumPad3)
+            else if (key.Key == ConsoleKey.NumPad3 || key.Key == ConsoleKey.D3)
             {
-                // print last transaction
-                Console.WriteLine("print last transaction");
+                var printer = new ConsolePrinter();
+                account.PrintLastTransaction(printer);
             }
         }
 
