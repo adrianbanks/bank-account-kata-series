@@ -45,8 +45,7 @@ namespace BankingConsole
             }
             else if (key.Key == ConsoleKey.NumPad2 || key.Key == ConsoleKey.D2)
             {
-                // withdraw
-                Console.WriteLine("withdraw");
+                WithdrawalMenu(account);
             }
             else if (key.Key == ConsoleKey.NumPad3 || key.Key == ConsoleKey.D3)
             {
@@ -65,6 +64,19 @@ namespace BankingConsole
             if(decimal.TryParse(line, out depositAmount))
             {
                 account.Deposit(DateTime.Now, new Money(depositAmount));
+            }
+        }
+
+        private static void WithdrawalMenu(IAccount account)
+        {
+            Console.WriteLine("Enter an amount to withdraw in pounds:");
+            Console.WriteLine();
+            var line = Console.ReadLine();
+
+            decimal depositAmount;
+            if (decimal.TryParse(line, out depositAmount))
+            {
+                account.Withdraw(new ATMDebitEntry(DateTime.Now, new Money(depositAmount)));
             }
         }
 
