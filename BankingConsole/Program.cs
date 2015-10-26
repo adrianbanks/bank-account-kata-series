@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Security.Cryptography;
 using BankingKata;
 
 namespace BankingConsole
@@ -9,8 +9,51 @@ namespace BankingConsole
         static void Main(string[] args)
         {
             var account = CreateAccount();
+            
+            WelcomeMessage(account);
 
+            while (true)
+            {
+                MainMenu(account);
+            }
+        }
+
+        private static void WelcomeMessage(IAccount account)
+        {
             Console.WriteLine("Welcome to your account.");
+        }
+
+        private static void MainMenu(IAccount account)
+        {
+            Console.WriteLine();
+            Console.WriteLine("Balance: £" + account.CalculateBalance());
+            Console.WriteLine();
+            Console.WriteLine("Press a key to choose an option:");
+            Console.WriteLine();
+            Console.WriteLine("  1. Cash deposit");
+            Console.WriteLine("  2. Cash withdrawal");
+            Console.WriteLine("  3. Print last transaction");
+            Console.WriteLine();
+
+            var key = Console.ReadKey();
+            Console.WriteLine();
+            Console.WriteLine();
+
+            if (key.Key == ConsoleKey.NumPad1)
+            {
+                // deposit
+                Console.WriteLine("deposit");
+            }
+            else if (key.Key == ConsoleKey.NumPad2)
+            {
+                // withdraw
+                Console.WriteLine("withdraw");
+            }
+            else if (key.Key == ConsoleKey.NumPad3)
+            {
+                // print last transaction
+                Console.WriteLine("print last transaction");
+            }
         }
 
         private static IAccount CreateAccount()
