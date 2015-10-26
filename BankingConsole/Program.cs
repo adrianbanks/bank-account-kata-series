@@ -58,14 +58,56 @@ namespace BankingConsole
 
         private static IAccount CreateAccount()
         {
-            var baseAccount = new Account();
-            var accountWithArrangedOverdraft = new AccountWithOverdraft(baseAccount,
-                new ArrangedOverdraft(new Money(-1500m), new Money(10m)));
-            var accountWithUnarrangedOverdraft = new AccountWithOverdraft(accountWithArrangedOverdraft,
-                new UnarrangedOverdraft(new Money(-4000m)));
+            return new AccountBuilder()
+                .WithStartingBalance(new Money(1000))
+                .WithOverdraftChargeOf(new Money(10))
+                .WithArrangedOverdraftLimitOf(new Money(-1500))
+                .WithUnarrangedOverdraftLimitOf(new Money(4000))
+                .Build();
+        }
 
-            baseAccount.Deposit(DateTime.Now, new Money(1000m));
-            return accountWithUnarrangedOverdraft;
+        public class AccountBuilder
+        {
+            private Money startingBalance = new Money(0);
+            private Money arrangedOverdraftLimit;
+            private Money unarrangedOverdraftLimit;
+            private Money overdraftCharge;
+
+            public AccountBuilder WithStartingBalance(Money startingBalance)
+            {
+                this.startingBalance = startingBalance;
+                return this;
+            }
+
+            public AccountBuilder WithOverdraftChargeOf(Money overdraftCharge)
+            {
+                this.overdraftCharge = overdraftCharge;
+                return this;
+            }
+
+            public AccountBuilder WithArrangedOverdraftLimitOf(Money overdraftLimit)
+            {
+                arrangedOverdraftLimit = overdraftLimit;
+                return this;
+            }
+
+            public AccountBuilder WithUnarrangedOverdraftLimitOf(Money overdraftLimit)
+            {
+                unarrangedOverdraftLimit = overdraftLimit;
+                return this;
+            }
+
+            public IAccount Build()
+            {
+                var baseAccount = new Account();
+                var arrangedOverdraft = new ArrangedOverdraft(arrangedOverdraftLimit, overdraftCharge);
+                var accountWithArrangedOverdraft = new AccountWithOverdraft(baseAccount, arrangedOverdraft);
+                var unarrangedOverdraft = new UnarrangedOverdraft(unarrangedOverdraftLimit);
+                var accountWithUnarrangedOverdraft = new AccountWithOverdraft(accountWithArrangedOverdraft, unarrangedOverdraft);
+
+                baseAccount.Deposit(DateTime.Now, startingBalance);
+                return accountWithUnarrangedOverdraft;
+            }
         }
     }
 }
