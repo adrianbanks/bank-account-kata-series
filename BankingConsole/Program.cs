@@ -56,27 +56,30 @@ namespace BankingConsole
 
         private static void DepositMenu(IAccount account)
         {
-            Console.WriteLine("Enter an amount to deposit in pounds:");
-            Console.WriteLine();
-            var line = Console.ReadLine();
-
-            decimal depositAmount;
-            if(decimal.TryParse(line, out depositAmount))
+            PerformAction("Enter an amount to deposit in pounds:", money =>
             {
-                account.Deposit(DateTime.Now, new Money(depositAmount));
-            }
+                account.Deposit(DateTime.Now, money);
+            });
         }
 
         private static void WithdrawalMenu(IAccount account)
         {
-            Console.WriteLine("Enter an amount to withdraw in pounds:");
+            PerformAction("Enter an amount to withdraw in pounds:", money =>
+            {
+                account.Withdraw(new ATMDebitEntry(DateTime.Now, money));
+            });
+        }
+
+        private static void PerformAction(string prompt, Action<Money> action)
+        {
+            Console.WriteLine(prompt);
             Console.WriteLine();
             var line = Console.ReadLine();
 
-            decimal depositAmount;
-            if (decimal.TryParse(line, out depositAmount))
+            decimal amount;
+            if (decimal.TryParse(line, out amount))
             {
-                account.Withdraw(new ATMDebitEntry(DateTime.Now, new Money(depositAmount)));
+                action(new Money(amount));
             }
         }
 
@@ -85,7 +88,7 @@ namespace BankingConsole
             return new AccountBuilder()
                 .WithStartingBalance(new Money(1000))
                 .WithOverdraftChargeOf(new Money(10))
-                .WithArrangedOverdraftLimitOf(new Money(-1500))
+                .WithArrangedOverdraftLimitOf(new Money(1500))
                 .WithUnarrangedOverdraftLimitOf(new Money(4000))
                 .Build();
         }
