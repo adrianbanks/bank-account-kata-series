@@ -46,6 +46,7 @@
     <Compile Include="AccountBuilder.cs" />
     <Compile Include="DepositAction.cs" />
     <Compile Include="IMenuAction.cs" />
+    <Compile Include="MenuOption.cs" />
     <Compile Include="PrintLastTransactionAction.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

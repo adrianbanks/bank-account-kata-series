@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Security.Cryptography;
 using BankingKata;
 
@@ -25,30 +26,35 @@ namespace BankingConsole
 
         private static void MainMenu(IAccount account)
         {
+            var userInputMenuAction = new UserAmountRequest();
+
+            var options = new[]
+            {
+                new MenuOption(ConsoleKey.NumPad1, "Cash deposit", new DepositAction(userInputMenuAction)),
+                new MenuOption(ConsoleKey.NumPad2, "Cash withdrawal", new WithdrawAction(userInputMenuAction)),
+                new MenuOption(ConsoleKey.NumPad3, "Print last transaction", new PrintLastTransactionAction())
+            };
+
             Console.WriteLine();
             Console.WriteLine("Balance: " + account.CalculateBalance());
             Console.WriteLine();
             Console.WriteLine("Press a key to choose an option:");
             Console.WriteLine();
-            Console.WriteLine("  1. Cash deposit");
-            Console.WriteLine("  2. Cash withdrawal");
-            Console.WriteLine("  3. Print last transaction");
+
+            foreach (var option in options)
+            {
+                option.Print();
+            }
+
             Console.WriteLine();
 
             var key = Console.ReadKey();
             Console.WriteLine();
             Console.WriteLine();
 
-            var userInputMenuAction = new UserAmountRequest();
+            var selectedMenuOption = options.SingleOrDefault(o => o.ActivatingKey == key.Key);
 
-            var options = new IMenuAction[]
-            {
-                new DepositAction(userInputMenuAction),
-                new WithdrawAction(userInputMenuAction),
-                new PrintLastTransactionAction()
-            };
-
-            options[0].PerformAction(account);
+            selectedMenuOption?.Action.PerformAction(account);
         }
 
         private static IAccount CreateAccount()
