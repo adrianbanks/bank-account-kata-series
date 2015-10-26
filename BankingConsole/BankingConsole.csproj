@@ -44,8 +44,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountBuilder.cs" />
+    <Compile Include="DepositAction.cs" />
+    <Compile Include="IMenuAction.cs" />
+    <Compile Include="PrintLastTransactionAction.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserAmountRequest.cs" />
+    <Compile Include="WithdrawAction.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

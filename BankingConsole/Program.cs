@@ -39,48 +39,16 @@ namespace BankingConsole
             Console.WriteLine();
             Console.WriteLine();
 
-            if (key.Key == ConsoleKey.NumPad1 || key.Key == ConsoleKey.D1)
-            {
-                DepositMenu(account);
-            }
-            else if (key.Key == ConsoleKey.NumPad2 || key.Key == ConsoleKey.D2)
-            {
-                WithdrawalMenu(account);
-            }
-            else if (key.Key == ConsoleKey.NumPad3 || key.Key == ConsoleKey.D3)
-            {
-                var printer = new ConsolePrinter();
-                account.PrintLastTransaction(printer);
-            }
-        }
+            var userInputMenuAction = new UserAmountRequest();
 
-        private static void DepositMenu(IAccount account)
-        {
-            PerformAction("Enter an amount to deposit in pounds:", money =>
+            var options = new IMenuAction[]
             {
-                account.Deposit(DateTime.Now, money);
-            });
-        }
+                new DepositAction(userInputMenuAction),
+                new WithdrawAction(userInputMenuAction),
+                new PrintLastTransactionAction()
+            };
 
-        private static void WithdrawalMenu(IAccount account)
-        {
-            PerformAction("Enter an amount to withdraw in pounds:", money =>
-            {
-                account.Withdraw(new ATMDebitEntry(DateTime.Now, money));
-            });
-        }
-
-        private static void PerformAction(string prompt, Action<Money> action)
-        {
-            Console.WriteLine(prompt);
-            Console.WriteLine();
-            var line = Console.ReadLine();
-
-            decimal amount;
-            if (decimal.TryParse(line, out amount))
-            {
-                action(new Money(amount));
-            }
+            options[0].PerformAction(account);
         }
 
         private static IAccount CreateAccount()
