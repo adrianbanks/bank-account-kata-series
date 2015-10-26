@@ -41,8 +41,7 @@ namespace BankingConsole
 
             if (key.Key == ConsoleKey.NumPad1 || key.Key == ConsoleKey.D1)
             {
-                // deposit
-                Console.WriteLine("deposit");
+                DepositMenu(account);
             }
             else if (key.Key == ConsoleKey.NumPad2 || key.Key == ConsoleKey.D2)
             {
@@ -53,6 +52,19 @@ namespace BankingConsole
             {
                 var printer = new ConsolePrinter();
                 account.PrintLastTransaction(printer);
+            }
+        }
+
+        private static void DepositMenu(IAccount account)
+        {
+            Console.WriteLine("Enter an amount to deposit in pounds:");
+            Console.WriteLine();
+            var line = Console.ReadLine();
+
+            decimal depositAmount;
+            if(decimal.TryParse(line, out depositAmount))
+            {
+                account.Deposit(DateTime.Now, new Money(depositAmount));
             }
         }
 
