@@ -24,13 +24,13 @@ namespace BankingConsole
 
         public AccountBuilder WithArrangedOverdraftLimitOf(Money overdraftLimit)
         {
-            _arrangedOverdraftLimit = overdraftLimit;
+            _arrangedOverdraftLimit = new Money(0) - overdraftLimit;
             return this;
         }
 
         public AccountBuilder WithUnarrangedOverdraftLimitOf(Money overdraftLimit)
         {
-            _unarrangedOverdraftLimit = overdraftLimit;
+            _unarrangedOverdraftLimit = new Money(0) - overdraftLimit;
             return this;
         }
 
